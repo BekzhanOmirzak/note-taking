@@ -7,19 +7,33 @@
 
     <fragment
         android:id="@+id/homeNoteFragment"
-        tools:layout="@layout/home_fragment"
-        android:name="com.android.notetaking.presentation.home.HomeFragment"
-        android:label="HomeNoteFragment" >
+        android:name="com.android.notetaking.presentation.ui.home.HomeFragment"
+        android:label="HomeNoteFragment"
+        tools:layout="@layout/home_fragment">
         <action
-            android:id="@+id/action_homeNoteFragment_to_noteDetailsFragment"
-            app:destination="@id/noteDetailsFragment" />
+            android:id="@+id/action_homeFragment_to_noteDetailsFragment"
+            app:destination="@id/noteDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/noteDetailsFragment"
-        tools:layout="@layout/note_details_fragment"
-        android:name="com.android.notetaking.presentation.details.NoteDetailsFragment"
-        android:label="NoteDetailsFragment" />
+        android:name="com.android.notetaking.presentation.ui.details.NoteDetailsFragment"
+        android:label="NoteDetailsFragment"
+        tools:layout="@layout/note_details_fragment">
+        <action
+            android:id="@+id/action_noteDetailsFragment_to_homeNoteFragment"
+            app:destination="@id/homeNoteFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/noteDetailsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 
 </navigation>

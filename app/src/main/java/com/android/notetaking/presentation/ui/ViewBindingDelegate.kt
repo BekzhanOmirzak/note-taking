@@ -1,4 +1,4 @@
-package com.android.notetaking.presentation
+package com.android.notetaking.presentation.ui
 
 import android.view.LayoutInflater
 import android.view.View
