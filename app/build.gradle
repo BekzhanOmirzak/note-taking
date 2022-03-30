@@ -53,6 +53,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dag_version"
 
     //Dagger Android
+    //noinspection OutdatedLibrary
     implementation "com.google.dagger:dagger-android:$dag_version"
     implementation "com.google.dagger:dagger-android-support:$dag_version"
     // if you use the support libraries
@@ -66,6 +67,8 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+
 
 
 }

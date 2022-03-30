@@ -55,14 +55,10 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
         setHasOptionsMenu(true)
         registerButtonClicks()
         settingNotesAdapter()
-        temporaryNoteSelected()
+
 
     }
 
-    private fun temporaryNoteSelected() {
-        val notes = listOf(NoteDto(), NoteDto(), NoteDto())
-        noteAdapter.updateNotesList(notes)
-    }
 
     private fun settingNotesAdapter() {
         noteAdapter = NoteAdapter(requireContext(), this)

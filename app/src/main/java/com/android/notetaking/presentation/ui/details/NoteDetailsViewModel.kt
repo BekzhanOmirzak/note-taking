@@ -1,6 +1,7 @@
 package com.android.notetaking.presentation.ui.details
 
 import androidx.lifecycle.ViewModel
+import com.android.notetaking.domain.interactors.NoteInteract
 import javax.inject.Inject
 
 /**
@@ -9,7 +10,8 @@ import javax.inject.Inject
  */
 
 
-class NoteDetailsViewModel @Inject constructor() : ViewModel() {
+class NoteDetailsViewModel @Inject constructor(private val noteInteract: NoteInteract) :
+    ViewModel() {
 
 
 

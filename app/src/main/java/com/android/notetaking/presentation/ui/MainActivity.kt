@@ -2,10 +2,14 @@ package com.android.notetaking.presentation.ui
 
 import android.graphics.Color
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.android.notetaking.R
 import com.android.notetaking.databinding.ActivityMainBinding
 import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : DaggerAppCompatActivity() {
 

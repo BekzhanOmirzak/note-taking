@@ -1,6 +1,5 @@
 package com.android.notetaking.presentation.ui.details
 
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import com.android.notetaking.R
 import com.android.notetaking.databinding.NoteDetailsFragmentBinding
 import com.android.notetaking.presentation.ui.MainActivity
 import com.android.notetaking.presentation.ui.viewBinding
-import com.google.android.material.slider.Slider
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -56,16 +54,26 @@ class NoteDetailsFragment : DaggerFragment() {
             btnBackButton.setOnClickListener {
                 btnBackButton.startAnimation(animFadeInBack)
                 (requireActivity() as MainActivity).navigate2HomeFragment()
-            }
-
-            btnAttach.setOnClickListener {
-                btnAttach.startAnimation(animFadeInAttach)
 
             }
-            btnSave.setOnClickListener {
-                btnSave.startAnimation(animFadeInSave)
+
+            noteAttach.setOnClickListener {
+                noteAttach.startAnimation(animFadeInAttach)
 
             }
+            noteSave.setOnClickListener {
+                noteSave.startAnimation(animFadeInSave)
+
+            }
+            imgDelete.setOnClickListener {
+                imgDelete.startAnimation(animFadeInBack)
+
+            }
+            noteDelete.setOnClickListener {
+                noteDelete.startAnimation(animFadeInNoteDel)
+
+            }
+
         }
     }
 
@@ -77,6 +85,9 @@ class NoteDetailsFragment : DaggerFragment() {
         AnimationUtils.loadAnimation(requireContext(), R.anim.imageview_effect)
     }
     private val animFadeInSave: Animation by lazy {
+        AnimationUtils.loadAnimation(requireContext(), R.anim.imageview_effect)
+    }
+    private val animFadeInNoteDel: Animation by lazy {
         AnimationUtils.loadAnimation(requireContext(), R.anim.imageview_effect)
     }
 

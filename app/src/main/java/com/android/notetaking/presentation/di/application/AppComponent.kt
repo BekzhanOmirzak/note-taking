@@ -1,8 +1,7 @@
 package com.android.notetaking.presentation.di.application
 
 import android.app.Application
-import android.content.Context
-import androidx.navigation.NavController
+import com.android.notetaking.data.di.InteractsModule
 import com.android.notetaking.presentation.ui.BaseApplication
 import dagger.BindsInstance
 import dagger.Component
@@ -15,15 +14,15 @@ import dagger.android.AndroidInjector
  */
 
 @AppScope
-@Component(modules = [AndroidInjectionModule::class, InjectBuildersModule::class, AppModule::class, ViewModelsModule::class])
+@Component(modules = [AndroidInjectionModule::class, InjectBuildersModule::class, AppModule::class, ViewModelsModule::class, InteractsModule::class])
 interface AppComponent : AndroidInjector<BaseApplication> {
 
 
     @Component.Builder
     interface Builder {
+
         @BindsInstance
         fun bindApplication(application: Application): Builder
-
 
         fun build(): AppComponent
     }
