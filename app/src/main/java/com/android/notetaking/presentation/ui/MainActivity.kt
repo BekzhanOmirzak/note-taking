@@ -10,21 +10,25 @@ import dagger.android.support.DaggerAppCompatActivity
 class MainActivity : DaggerAppCompatActivity() {
 
     private val binding: ActivityMainBinding by viewBinding(ActivityMainBinding::inflate)
-    private val navController by lazy { findNavController(R.id.main_nav) }
+    val navController by lazy { findNavController(R.id.main_nav) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-    }
 
+    }
 
     fun settingUpToolBar(toolBar: androidx.appcompat.widget.Toolbar) {
         setSupportActionBar(toolBar)
         toolBar.overflowIcon?.setTint(Color.WHITE)
     }
 
-    fun navigate2NoteDetailsFragment() {
-        navController.navigate(R.id.action_homeFragment_to_noteDetailsFragment)
+    fun navigate2NoteDetailsFragmentHor() {
+        navController.navigate(R.id.action_homeFragment_to_noteDetailsFragment_hor)
+    }
+
+    fun navigate2NoteDetailsFragmentVer() {
+        navController.navigate(R.id.action_homeFragment_to_noteDetailsFragment_ver)
     }
 
     fun navigate2HomeFragment() {

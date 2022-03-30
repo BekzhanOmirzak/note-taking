@@ -24,12 +24,7 @@ import javax.inject.Inject
 class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
 
     private val binding: HomeFragmentBinding by viewBinding(HomeFragmentBinding::bind)
-    private val animFadeInSort: Animation by lazy {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.imageview_effect)
-    }
-    private val animFadeInSearch: Animation by lazy {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.imageview_effect)
-    }
+
 
     lateinit var noteAdapter: NoteAdapter
 
@@ -81,18 +76,25 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
             btnBackButton.setOnClickListener {
 
             }
-            iconSearch.setOnClickListener {
-                iconSearch.startAnimation(animFadeInSort)
+            btnSearch.setOnClickListener {
+                btnSearch.startAnimation(animFadeInSort)
                 showToastMessage("Поиск в требования не включен")
             }
 
-            iconSort.setOnClickListener {
-                iconSort.startAnimation(animFadeInSearch)
+            btnSort.setOnClickListener {
+                btnSort.startAnimation(animFadeInSearch)
                 showToastMessage("Сортировка в требования не включен")
             }
+
+            btnFa.setOnClickListener {
+                curActivity().navigate2NoteDetailsFragmentVer()
+            }
+
         }
 
     }
+
+    private fun curActivity(): MainActivity = requireActivity() as MainActivity
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return super.onOptionsItemSelected(item)
@@ -108,7 +110,14 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
     }
 
     override fun onNoteClicked(note: NoteDto) {
-        (requireActivity() as MainActivity).navigate2NoteDetailsFragment()
+        curActivity().navigate2NoteDetailsFragmentHor()
+    }
+
+    private val animFadeInSort: Animation by lazy {
+        AnimationUtils.loadAnimation(requireContext(), R.anim.imageview_effect)
+    }
+    private val animFadeInSearch: Animation by lazy {
+        AnimationUtils.loadAnimation(requireContext(), R.anim.imageview_effect)
     }
 
 }

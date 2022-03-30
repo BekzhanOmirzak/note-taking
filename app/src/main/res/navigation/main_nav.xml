@@ -11,12 +11,19 @@
         android:label="HomeNoteFragment"
         tools:layout="@layout/home_fragment">
         <action
-            android:id="@+id/action_homeFragment_to_noteDetailsFragment"
+            android:id="@+id/action_homeFragment_to_noteDetailsFragment_hor"
             app:destination="@id/noteDetailsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_noteDetailsFragment_ver"
+            app:destination="@id/noteDetailsFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/sligh_in_bottom"
+            app:popExitAnim="@anim/slide_out_top" />
     </fragment>
 
     <fragment
@@ -26,13 +33,13 @@
         tools:layout="@layout/note_details_fragment">
         <action
             android:id="@+id/action_noteDetailsFragment_to_homeNoteFragment"
-            app:destination="@id/homeNoteFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left"
-            app:popUpTo="@id/noteDetailsFragment"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/homeNoteFragment"
+            app:popUpToInclusive="false" />
+
     </fragment>
 
 
