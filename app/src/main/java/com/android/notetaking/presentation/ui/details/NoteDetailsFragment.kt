@@ -41,12 +41,11 @@ class NoteDetailsFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         settingUpButtonClicks()
-        handleEditTextClicks()
-    }
 
-    private fun handleEditTextClicks() {
 
     }
+
+
 
     private fun settingUpButtonClicks() {
         with(binding) {
@@ -63,6 +62,8 @@ class NoteDetailsFragment : DaggerFragment() {
             }
             noteSave.setOnClickListener {
                 noteSave.startAnimation(animFadeInSave)
+
+
 
             }
             imgDelete.setOnClickListener {

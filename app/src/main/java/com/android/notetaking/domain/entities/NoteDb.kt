@@ -14,6 +14,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "notes")
 data class NoteDb(
 
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
+
     @ColumnInfo(name = "name")
     val name: String,
 
@@ -21,7 +24,7 @@ data class NoteDb(
     val content: String,
 
     @ColumnInfo(name = "note_image")
-    val noteImage: Bitmap,
+    val noteImage: Bitmap?,
 
     @ColumnInfo(name = "date_created")
     val dateCreated: Long,
@@ -30,9 +33,6 @@ data class NoteDb(
     val dateUpdated: Long
 
 ) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
-
 
     @Ignore
     fun toNoteDto() = NoteDto(

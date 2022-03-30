@@ -1,13 +1,16 @@
 package com.android.notetaking.domain.interactors
 
+import com.android.notetaking.domain.entities.NoteDb
+
 /**
  * Created by bekjan on 30.03.2022.
  * email: bekjan.omirzak98@gmail.com
  */
+
+
 interface NoteInteract {
 
-
-
-
+    suspend fun insertNote(noteDb: NoteDb)
+    suspend fun updateNote(noteDb: NoteDb)
 
 }

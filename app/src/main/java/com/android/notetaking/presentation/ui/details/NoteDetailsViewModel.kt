@@ -14,5 +14,7 @@ class NoteDetailsViewModel @Inject constructor(private val noteInteract: NoteInt
     ViewModel() {
 
 
+        fun insertNewNote()
+
 
 }
