@@ -25,11 +25,16 @@ interface NoteDao {
     @Update
     suspend fun updateNote(nodeDb: NoteDb)
 
+    @Query("SELECT * FROM notes ORDER BY date_updated DESC")
+    fun getFlowAllNotes(): Flow<List<NoteDb>>
+
     @Query("SELECT * FROM notes")
-    fun getAllNotes(): Flow<List<NoteDb>>
+    suspend fun getAllNotes(): List<NoteDb>
 
     @Query("SELECT * FROM notes WHERE id=:id")
     suspend fun getNoteById(id: Int): NoteDb
 
+    @Delete
+    suspend fun deleteNotes(notes: List<NoteDb>)
 
 }

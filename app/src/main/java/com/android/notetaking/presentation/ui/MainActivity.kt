@@ -46,8 +46,9 @@ class MainActivity : DaggerAppCompatActivity() {
         val curFragment = navController.currentDestination?.id
         if (curFragment == R.id.noteDetailsFragment) {
             navigate2HomeFragment()
-        } else
+        } else {
             super.onBackPressed()
+        }
     }
 
 

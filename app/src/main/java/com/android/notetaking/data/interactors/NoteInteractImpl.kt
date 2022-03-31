@@ -20,7 +20,10 @@ class NoteInteractImpl @Inject constructor(private val noteDao: NoteDao) : NoteI
 
     override suspend fun deleteNote(noteDb: NoteDb) = noteDao.deletedNote(noteDb)
 
-    override fun getAllNotes() = noteDao.getAllNotes()
+    override fun getAllFlowNotes() = noteDao.getFlowAllNotes()
+
+    override suspend fun deleteNoteList(notes: List<NoteDb>) = noteDao.deleteNotes(notes)
+
 
 
 }

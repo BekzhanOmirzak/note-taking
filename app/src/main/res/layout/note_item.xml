@@ -7,6 +7,7 @@
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
+    android:id="@+id/noteCard"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
 
@@ -20,8 +21,7 @@
             android:layout_width="30dp"
             android:layout_height="0dp"
             android:layout_marginStart="5dp"
-            android:visibility="visible"
-            android:button="@drawable/checkbox_selector"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/noteTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/noteTitle" />

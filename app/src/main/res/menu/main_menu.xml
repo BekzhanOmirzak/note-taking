@@ -2,7 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/title"
-        android:title="No title" />
+        android:id="@+id/selectAll"
+        android:title="Выбрать все" />
+
+    <item
+        android:id="@+id/delete"
+        android:title="Удалить" />
 
 </menu>

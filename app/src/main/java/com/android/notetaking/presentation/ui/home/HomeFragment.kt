@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,7 @@ import com.android.notetaking.presentation.tools.showToastMessage
 import com.android.notetaking.presentation.ui.MainActivity
 import com.android.notetaking.presentation.ui.viewBinding
 import dagger.android.support.DaggerFragment
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,11 +32,11 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
     private val binding: HomeFragmentBinding by viewBinding(HomeFragmentBinding::bind)
 
     lateinit var noteAdapter: NoteAdapter
+    private var selectedNotes = listOf<NoteDto>()
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private val homeViewModel by viewModels<HomeFragmentViewModel> { viewModelFactory }
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -60,6 +62,14 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
         registerButtonClicks()
         settingNotesAdapter()
         observingAllNotes()
+        backButtonCancellingCheckedbox()
+    }
+
+    private fun backButtonCancellingCheckedbox() {
+        curActivity().("" +
+                "onBack.addCallback(this) {)
+            VLog.d("Back Button clicked")
+        }
     }
 
     private fun observingAllNotes() {
@@ -73,12 +83,14 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
     }
 
     private fun setAllNotesToRecView(it: List<NoteDto>) {
-        if (it.isEmpty()) {
-            showEmptyNoteTxtHideRecView()
-        } else {
-            hideEmptyNoteShowRecView()
-            noteAdapter.updateNotesList(it)
-            binding.txtTitleToolbar.text = "Заметки : ${it.size}"
+        kotlin.runCatching {
+            if (it.isEmpty()) {
+                showEmptyNoteTxtHideRecView()
+            } else {
+                hideEmptyNoteShowRecView()
+                noteAdapter.updateNotesList(it)
+                binding.txtTitleToolbar.text = "Заметки : ${it.size}"
+            }
         }
     }
 
@@ -88,6 +100,7 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
             noNotesTxt.visibility = View.GONE
             noNoteAddTxt.visibility = View.GONE
             notesRecView.visibility = View.VISIBLE
+            txtTitleToolbar.text = "Заметки : 0"
         }
     }
 
@@ -122,18 +135,28 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
 
             btnCreate.setOnClickListener {
                 curActivity().navigate2NoteDetailsFragmentVer()
-
             }
 
         }
 
     }
 
+
     private fun curActivity(): MainActivity = requireActivity() as MainActivity
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.delete -> {
+                if (selectedNotes.isEmpty()) return true
+                homeViewModel.deleteSelectedNotes(selectedNotes)
+            }
+            R.id.selectAll -> {
+                noteAdapter.selectAllNotes()
+            }
+        }
         return super.onOptionsItemSelected(item)
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
@@ -141,26 +164,25 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
     }
 
 
-    override fun onNoteClicked(note: NoteDto) {
-        curActivity().navigate2NoteDetailsFragmentHor(note.id)
-    }
-
-
-    override fun checkedNotes(notes: List<NoteDto>) {
-        binding.txtTitleToolbar.setText("Выбрано : ${notes.size}")
-    }
-
-    override fun onOnLongClicked() {
-        if (!noteAdapter.checkedBoxVisible) {
-            homeViewModel.observerAllNotes()
-        }
-    }
-
     private val animFadeInSort: Animation by lazy {
         AnimationUtils.loadAnimation(requireContext(), R.anim.imageview_effect)
     }
     private val animFadeInSearch: Animation by lazy {
         AnimationUtils.loadAnimation(requireContext(), R.anim.imageview_effect)
     }
+
+    override fun onNoteClicked(note: NoteDto) {
+        curActivity().navigate2NoteDetailsFragmentHor(note.id)
+    }
+
+    override fun checkedNotes(notes: List<NoteDto>) {
+        if (noteAdapter.isSelectMode) {
+            selectedNotes = notes
+            binding.txtTitleToolbar.text = "Выбрано : ${notes.size}"
+        } else {
+            homeViewModel.observerAllNotes()
+        }
+    }
+
 
 }

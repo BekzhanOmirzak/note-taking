@@ -14,7 +14,7 @@ data class NoteDto(
     var dateUpdated: Long,
     var noteImage: Bitmap?
 ) {
-    var isChecked = false
+    var isChecked: Boolean = false
 
     fun toNoteDb(): NoteDb = NoteDb(
         id = id,

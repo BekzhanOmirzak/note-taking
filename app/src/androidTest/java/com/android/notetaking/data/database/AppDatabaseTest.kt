@@ -6,7 +6,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.notetaking.domain.entities.NoteDb
 import com.android.notetaking.domain.entities.NoteDto
-import com.android.notetaking.presentation.tools.VLog
 import junit.framework.TestCase
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -14,7 +13,6 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import com.google.common.truth.Truth
 import com.google.common.truth.Truth.assertThat
 
 

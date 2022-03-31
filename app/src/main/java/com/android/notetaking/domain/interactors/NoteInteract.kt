@@ -15,6 +15,8 @@ interface NoteInteract {
     suspend fun updateNote(noteDb: NoteDb)
     suspend fun getNoteById(id: Int): NoteDb
     suspend fun deleteNote(noteDb: NoteDb)
-    fun getAllNotes(): Flow<List<NoteDb>>
+    fun getAllFlowNotes(): Flow<List<NoteDb>>
+    suspend fun deleteNoteList(notes: List<NoteDb>)
+
 
 }
