@@ -101,6 +101,13 @@ class NoteAdapter(private val context: Context, private val noteListener: NoteCl
         noteListener.checkedNotes(notes)
     }
 
+    fun unSelectAllNotes() {
+        isSelectMode = false
+        notes.forEach { it.isChecked = false }
+        notifyDataSetChanged()
+        selectedNotes.clear()
+    }
+
     interface NoteClickListener {
         fun onNoteClicked(note: NoteDto)
         fun checkedNotes(notes: List<NoteDto>)

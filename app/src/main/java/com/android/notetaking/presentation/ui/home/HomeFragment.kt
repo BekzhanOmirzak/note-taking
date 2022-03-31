@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +20,7 @@ import com.android.notetaking.presentation.ui.MainActivity
 import com.android.notetaking.presentation.ui.viewBinding
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,6 +35,7 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
 
     lateinit var noteAdapter: NoteAdapter
     private var selectedNotes = listOf<NoteDto>()
+    lateinit var backPressedCallback: OnBackPressedCallback
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -62,15 +65,8 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
         registerButtonClicks()
         settingNotesAdapter()
         observingAllNotes()
-        backButtonCancellingCheckedbox()
     }
 
-    private fun backButtonCancellingCheckedbox() {
-        curActivity().("" +
-                "onBack.addCallback(this) {)
-            VLog.d("Back Button clicked")
-        }
-    }
 
     private fun observingAllNotes() {
         lifecycleScope.launch {
@@ -125,12 +121,12 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
 
             btnSearch.setOnClickListener {
                 btnSearch.startAnimation(animFadeInSort)
-                curActivity().showToastMessage("Поиск в требования не включен")
+                curActivity().showToastMessage("Поиск в требование не включен")
             }
 
             btnSort.setOnClickListener {
                 btnSort.startAnimation(animFadeInSearch)
-                curActivity().showToastMessage("Сортировка в требования не включен")
+                curActivity().showToastMessage("Сортировка в требование не включен")
             }
 
             btnCreate.setOnClickListener {
@@ -162,7 +158,6 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
         inflater.inflate(R.menu.main_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
-
 
     private val animFadeInSort: Animation by lazy {
         AnimationUtils.loadAnimation(requireContext(), R.anim.imageview_effect)
