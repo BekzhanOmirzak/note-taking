@@ -8,21 +8,21 @@ import android.graphics.Bitmap
  */
 data class NoteDto(
     val id: Int,
-    val name: String,
-    val content: String,
-    val dateCreated: Long,
-    val dateUpdated: Long,
-    val noteImage: Bitmap?
+    var title: String,
+    var content: String,
+    var dateCreated: Long,
+    var dateUpdated: Long,
+    var noteImage: Bitmap?
 ) {
+    var isChecked = false
 
     fun toNoteDb(): NoteDb = NoteDb(
         id = id,
-        name = name,
+        title = title,
         content = content,
         noteImage = noteImage,
         dateCreated = dateCreated,
         dateUpdated = dateUpdated
     )
-
 
 }

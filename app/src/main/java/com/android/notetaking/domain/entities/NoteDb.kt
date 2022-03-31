@@ -3,7 +3,6 @@ package com.android.notetaking.domain.entities
 import android.graphics.Bitmap
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 /**
@@ -17,8 +16,8 @@ data class NoteDb(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
 
-    @ColumnInfo(name = "name")
-    val name: String,
+    @ColumnInfo(name = "title")
+    val title: String,
 
     @ColumnInfo(name = "content")
     val content: String,
@@ -34,16 +33,13 @@ data class NoteDb(
 
 ) {
 
-    @Ignore
     fun toNoteDto() = NoteDto(
         id = id,
-        name = name,
+        title = title,
         content = content,
         dateCreated = dateCreated,
         dateUpdated = dateUpdated,
         noteImage = noteImage
     )
-
 }
-
 

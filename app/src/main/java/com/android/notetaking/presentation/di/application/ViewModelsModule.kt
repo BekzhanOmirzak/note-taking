@@ -17,6 +17,7 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class ViewModelsModule {
 
+
     @IntoMap
     @Binds
     @ViewModelKey(HomeFragmentViewModel::class)
@@ -26,7 +27,6 @@ abstract class ViewModelsModule {
     @Binds
     @ViewModelKey(NoteDetailsViewModel::class)
     abstract fun noteDetailsViewModel(noteDetailsViewModel: NoteDetailsViewModel): ViewModel
-
 
 
 

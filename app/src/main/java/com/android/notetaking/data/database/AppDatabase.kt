@@ -14,6 +14,7 @@ import com.android.notetaking.domain.entities.NoteDb
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
+    //has been tested
     abstract val noteDao: NoteDao
 
     companion object {

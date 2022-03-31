@@ -11,9 +11,16 @@ import javax.inject.Inject
  */
 class NoteInteractImpl @Inject constructor(private val noteDao: NoteDao) : NoteInteract {
 
+
     override suspend fun insertNote(noteDb: NoteDb) = noteDao.insertNote(noteDb)
 
     override suspend fun updateNote(noteDb: NoteDb) = noteDao.updateNote(noteDb)
+
+    override suspend fun getNoteById(id: Int) = noteDao.getNoteById(id)
+
+    override suspend fun deleteNote(noteDb: NoteDb) = noteDao.deletedNote(noteDb)
+
+    override fun getAllNotes() = noteDao.getAllNotes()
 
 
 }

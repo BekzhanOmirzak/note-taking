@@ -16,12 +16,12 @@
         android:padding="5dp">
 
         <CheckBox
-            android:id="@+id/checkBox"
-            style="@style/CustomCheckbox02"
+            android:id="@+id/note_checked"
             android:layout_width="30dp"
             android:layout_height="0dp"
             android:layout_marginStart="5dp"
-            android:visibility="gone"
+            android:visibility="visible"
+            android:button="@drawable/checkbox_selector"
             app:layout_constraintBottom_toBottomOf="@+id/noteTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/noteTitle" />
@@ -31,12 +31,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="Coupon Codes"
             android:textColor="#2C2929"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/noteCreateDate"
-            app:layout_constraintStart_toEndOf="@+id/checkBox"
+            app:layout_constraintStart_toEndOf="@+id/note_checked"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_goneMarginStart="5dp" />
 
@@ -48,6 +50,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
+            android:ellipsize="start"
+            android:maxLines="1"
             android:text="Wasabi:21322-4132239-2893"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

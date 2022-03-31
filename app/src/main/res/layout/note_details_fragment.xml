@@ -20,8 +20,8 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="Add Title"
-                android:lines="1"
                 android:maxLines="1"
+                android:inputType="text"
                 android:padding="15dp"
                 android:textColor="#2C2929"
                 android:textSize="20sp"
@@ -41,30 +41,37 @@
                 android:padding="15dp"
                 android:scrollbars="vertical"
                 android:scrollHorizontally="false"
-                app:layout_constraintTop_toBottomOf="@id/note_image" />
+                app:layout_constraintTop_toBottomOf="@id/imageFrame" />
 
-            <ImageView
-                android:id="@+id/note_image"
+            <FrameLayout
+                android:id="@+id/imageFrame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:adjustViewBounds="true"
-                android:scaleType="center"
-                android:src="@drawable/temp_photo"
-                app:layout_constraintTop_toBottomOf="@+id/view" />
+                app:layout_constraintTop_toBottomOf="@id/view">
+
+                <ImageView
+                    android:id="@+id/note_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/temp_photo"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/view" />
 
 
-            <ImageView
-                android:id="@+id/img_delete"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/background_delete"
-                tools:layout_editor_absoluteX="370dp"
-                android:padding="4dp"
-                android:src="@drawable/delete_icon"
-                app:layout_constraintEnd_toEndOf="@id/note_image"
-                app:layout_constraintTop_toTopOf="@id/note_image"
-                tools:layout_editor_absoluteY="130dp" />
+                <ImageView
+                    android:id="@+id/img_delete"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="end|top"
+                    android:background="@drawable/background_delete"
+                    android:padding="4dp"
+                    android:src="@drawable/delete_icon"
+                    android:visibility="gone" />
+
+            </FrameLayout>
 
             <View
                 android:id="@+id/view"

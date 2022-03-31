@@ -12,5 +12,4 @@ object VLog {
         Timber.tag(tag).e(message)
     }
 
-
 }

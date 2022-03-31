@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">NoteTaking</string>
+    <string name="emptyNotes">Заметки отсутствуют</string>
+    <string name="add_note">Коснитесь кнопки "Добавить", чтобы создать заметку.</string>
 </resources>
+
+<!--    -->

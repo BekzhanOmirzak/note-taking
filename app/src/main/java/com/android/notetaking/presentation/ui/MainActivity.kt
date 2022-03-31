@@ -2,10 +2,12 @@ package com.android.notetaking.presentation.ui
 
 import android.graphics.Color
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.android.notetaking.R
 import com.android.notetaking.databinding.ActivityMainBinding
+import com.android.notetaking.presentation.ui.details.NoteDetailsFragment
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,8 +29,9 @@ class MainActivity : DaggerAppCompatActivity() {
         toolBar.overflowIcon?.setTint(Color.WHITE)
     }
 
-    fun navigate2NoteDetailsFragmentHor() {
-        navController.navigate(R.id.action_homeFragment_to_noteDetailsFragment_hor)
+    fun navigate2NoteDetailsFragmentHor(idNote: Int) {
+        val bundle = bundleOf(NoteDetailsFragment.idNote to idNote)
+        navController.navigate(R.id.action_homeFragment_to_noteDetailsFragment_hor, bundle)
     }
 
     fun navigate2NoteDetailsFragmentVer() {

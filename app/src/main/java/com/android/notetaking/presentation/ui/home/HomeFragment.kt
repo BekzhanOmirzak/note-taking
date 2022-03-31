@@ -5,16 +5,20 @@ import android.os.Bundle
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.mydaggerproject.di.factory.ViewModelFactory
 import com.android.notetaking.R
 import com.android.notetaking.databinding.HomeFragmentBinding
 import com.android.notetaking.domain.entities.NoteDto
-import com.android.notetaking.presentation.ui.MainActivity
 import com.android.notetaking.presentation.tools.VLog
+import com.android.notetaking.presentation.tools.showToastMessage
+import com.android.notetaking.presentation.ui.MainActivity
 import com.android.notetaking.presentation.ui.viewBinding
 import dagger.android.support.DaggerFragment
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -25,11 +29,11 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
 
     private val binding: HomeFragmentBinding by viewBinding(HomeFragmentBinding::bind)
 
-
     lateinit var noteAdapter: NoteAdapter
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    private val homeViewModel by viewModels<HomeFragmentViewModel> { viewModelFactory }
 
 
     override fun onAttach(context: Context) {
@@ -38,7 +42,7 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        VLog.d("Injected ViewModelFactory : $viewModelFactory")
+
     }
 
     override fun onCreateView(
@@ -55,10 +59,45 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
         setHasOptionsMenu(true)
         registerButtonClicks()
         settingNotesAdapter()
-
-
+        observingAllNotes()
     }
 
+    private fun observingAllNotes() {
+        lifecycleScope.launch {
+            homeViewModel.allNotes.collect {
+                it?.let {
+                    setAllNotesToRecView(it)
+                }
+            }
+        }
+    }
+
+    private fun setAllNotesToRecView(it: List<NoteDto>) {
+        if (it.isEmpty()) {
+            showEmptyNoteTxtHideRecView()
+        } else {
+            hideEmptyNoteShowRecView()
+            noteAdapter.updateNotesList(it)
+            binding.txtTitleToolbar.text = "Заметки : ${it.size}"
+        }
+    }
+
+
+    private fun hideEmptyNoteShowRecView() {
+        binding.apply {
+            noNotesTxt.visibility = View.GONE
+            noNoteAddTxt.visibility = View.GONE
+            notesRecView.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showEmptyNoteTxtHideRecView() {
+        binding.apply {
+            noNotesTxt.visibility = View.VISIBLE
+            noNoteAddTxt.visibility = View.VISIBLE
+            notesRecView.visibility = View.GONE
+        }
+    }
 
     private fun settingNotesAdapter() {
         noteAdapter = NoteAdapter(requireContext(), this)
@@ -69,21 +108,21 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
     private fun registerButtonClicks() {
 
         binding.apply {
-            btnBackButton.setOnClickListener {
 
-            }
+
             btnSearch.setOnClickListener {
                 btnSearch.startAnimation(animFadeInSort)
-                showToastMessage("Поиск в требования не включен")
+                curActivity().showToastMessage("Поиск в требования не включен")
             }
 
             btnSort.setOnClickListener {
                 btnSort.startAnimation(animFadeInSearch)
-                showToastMessage("Сортировка в требования не включен")
+                curActivity().showToastMessage("Сортировка в требования не включен")
             }
 
-            btnFa.setOnClickListener {
+            btnCreate.setOnClickListener {
                 curActivity().navigate2NoteDetailsFragmentVer()
+
             }
 
         }
@@ -101,12 +140,20 @@ class HomeFragment : DaggerFragment(), NoteAdapter.NoteClickListener {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    private fun showToastMessage(message: String) {
-        Toast.makeText(requireActivity(), message, Toast.LENGTH_LONG).show()
-    }
 
     override fun onNoteClicked(note: NoteDto) {
-        curActivity().navigate2NoteDetailsFragmentHor()
+        curActivity().navigate2NoteDetailsFragmentHor(note.id)
+    }
+
+
+    override fun checkedNotes(notes: List<NoteDto>) {
+        binding.txtTitleToolbar.setText("Выбрано : ${notes.size}")
+    }
+
+    override fun onOnLongClicked() {
+        if (!noteAdapter.checkedBoxVisible) {
+            homeViewModel.observerAllNotes()
+        }
     }
 
     private val animFadeInSort: Animation by lazy {
