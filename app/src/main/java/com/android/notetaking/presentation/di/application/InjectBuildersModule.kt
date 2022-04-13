@@ -23,4 +23,5 @@ abstract class InjectBuildersModule {
     @ContributesAndroidInjector
     abstract fun injectNoteDetailsFragment(): NoteDetailsFragment
 
+
 }
