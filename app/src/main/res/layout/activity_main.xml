@@ -1,97 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".presentation.ui.MainActivity">
-
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:checked="true"
-        android:thumb="@drawable/ic_circle"
-        android:track="@drawable/track_selector"
-        android:visibility="gone"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-
-    <RadioGroup
-        android:id="@+id/toggle"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/pink_out_line"
-        android:checkedButton="@+id/offer"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/search"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_widget_background"
-            android:button="@null"
-            android:gravity="center"
-            android:text="Search"
-            android:textColor="@color/white" />
-
-        <RadioButton
-            android:id="@+id/offer"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginBottom="1dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_widget_background"
-            android:button="@null"
-            android:gravity="center"
-            android:text="Offers"
-            android:textColor="@color/white" />
-
-    </RadioGroup>
-
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/my_switch_outline"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/my_toggle_background"
-            android:button="@null"
-            android:gravity="center"
-            android:textColor="@drawable/my_toggle_text_color"
-            android:text="Coin" />
-
-        <RadioButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/my_toggle_background"
-            android:button="@null"
-            android:textColor="@drawable/my_toggle_text_color"
-            android:gravity="center"
-            android:text="Token" />
-
-    </RadioGroup>
+    android:id="@+id/rootLinearLayout"
+    android:orientation="vertical">
 
 
 </LinearLayout>
